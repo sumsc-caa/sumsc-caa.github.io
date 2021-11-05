@@ -47,7 +47,7 @@
     <link href="https://sumsc.github.io/2021/11/05/hackathon2021-q2-tetris/"/>
     <id>https://sumsc.github.io/2021/11/05/hackathon2021-q2-tetris/</id>
     <published>2021-11-05T13:57:23.000Z</published>
-    <updated>2021-11-05T14:30:21.492Z</updated>
+    <updated>2021-11-05T14:36:06.977Z</updated>
     
     <content type="html"><![CDATA[<h1 id="tetris002-简介"><a class="markdownIt-Anchor" href="#tetris002-简介"></a> Tetris0.0.2 简介</h1><p><a href="/2021/11/05/hackathon2021/">返回比赛题目</a></p><p>demo作者：苏州大学计算机爱好者协会（微软学生俱乐部）- 技术组 - 邓宏灿</p><hr /><p>这是一个使用 pygame 制作的一个俄罗斯方块游戏(Tetris)</p><p>主要运用了面向结构的编程思想</p><p>游戏结束时会显示结束语和当前分数</p><h2 id="操作"><a class="markdownIt-Anchor" href="#操作"></a> 操作</h2><h3 id="基本按键"><a class="markdownIt-Anchor" href="#基本按键"></a> 基本按键</h3><ul><li>A ,D 左右移动方块</li><li>S 加快方块下落</li><li>J 旋转方块</li></ul><h3 id="速度调节"><a class="markdownIt-Anchor" href="#速度调节"></a> 速度调节</h3><p>修改代码开头的SPEED变量，注意数字越小速度越快。</p><h2 id="下载"><a class="markdownIt-Anchor" href="#下载"></a> 下载</h2><p><a href="/2021hackathon/tetris/tetris.py">tetris.py</a>  （请右键另存为）</p><h2 id="有待改进之处"><a class="markdownIt-Anchor" href="#有待改进之处"></a> 有待改进之处</h2><ul><li>没有对旋转行为进行判定，在方块密集的地方旋转会出现问题</li><li>长按时作出多次响应</li><li>为方块添加颜色</li><li>在游戏界面内显示分数</li><li>在游戏界面内显示之后方块的顺序</li><li>提供切换方块的功能</li><li>随着时间逐渐增加游戏速度</li><li>……</li></ul>]]></content>
     
@@ -60,6 +60,12 @@
     
     
     
+    <category term="活动" scheme="https://sumsc.github.io/categories/%E6%B4%BB%E5%8A%A8/"/>
+    
+    
+    <category term="Python" scheme="https://sumsc.github.io/tags/Python/"/>
+    
+    <category term="Hackathon" scheme="https://sumsc.github.io/tags/Hackathon/"/>
     
   </entry>
   
@@ -68,7 +74,7 @@
     <link href="https://sumsc.github.io/2021/11/05/hackathon2021-q1-snake/"/>
     <id>https://sumsc.github.io/2021/11/05/hackathon2021-q1-snake/</id>
     <published>2021-11-05T13:57:14.000Z</published>
-    <updated>2021-11-05T14:30:21.498Z</updated>
+    <updated>2021-11-05T14:36:06.978Z</updated>
     
     <content type="html"><![CDATA[<h1 id="贪吃蛇demo-说明"><a class="markdownIt-Anchor" href="#贪吃蛇demo-说明"></a> 贪吃蛇demo 说明</h1><p><a href="/2021/11/05/hackathon2021/">返回比赛题目</a></p><p>demo作者：苏州大学计算机爱好者协会（微软学生俱乐部）- 技术组 - 王嘉睿</p><hr /><p>用python制作的在命令行中运行的贪吃蛇小游戏。</p><p>在cmd/powershell或linux/MacOS的终端（建议将终端的字体设为等宽字体）中输入</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; python snake.py</span><br></pre></td></tr></table></figure><p>随后程序会立即开始运行。</p><h2 id="操作"><a class="markdownIt-Anchor" href="#操作"></a> 操作</h2><p><code>w</code>：向上运动</p><p><code>a</code>：向左运动</p><p><code>s</code>：向下运动</p><p><code>d</code>：向右运动</p><h2 id="下载"><a class="markdownIt-Anchor" href="#下载"></a> 下载</h2><p><a href="/2021hackathon/snake/snake.py">snake.py</a>  （请右键另存为）</p><h2 id="有待改进之处"><a class="markdownIt-Anchor" href="#有待改进之处"></a> 有待改进之处</h2><ul><li>随着分数增加游戏速度</li><li>增加障碍物</li><li>为蛇和食物添加不同颜色（见 <a href="https://pypi.org/project/colorama/">https://pypi.org/project/colorama/</a> ）</li><li>从命令行参数获取游戏地图的设置。例如运行<code>python snake.py 30 20 -f 2</code>得到的游戏地图的长宽分别为30，20，其中有2个食物（见 <a href="https://pypi.org/project/colorama/">https://docs.python.org/zh-cn/3/library/argparse.html</a> ）</li><li>……</li></ul>]]></content>
     
@@ -81,32 +87,12 @@
     
     
     
-    
-  </entry>
-  
-  <entry>
-    <title>Python 指南 (turtle)</title>
-    <link href="https://sumsc.github.io/2021/10/02/python2021-turtle/"/>
-    <id>https://sumsc.github.io/2021/10/02/python2021-turtle/</id>
-    <published>2021-10-01T23:00:00.000Z</published>
-    <updated>2021-11-05T13:38:41.559Z</updated>
-    
-    <content type="html"><![CDATA[<p>Python turtle 参考资料</p><ul><li><a href="https://blog.csdn.net/sandalphon4869/article/details/99443949?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=pythontuttle%E5%85%A5%E9%97%A8&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-99443949.first_rank_v2_pc_rank_v29&amp;spm=1018.2226.3001.4187">入门</a></li><li><a href="https://blog.csdn.net/qq_38851184/article/details/104973288?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163212833516780261951206%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=163212833516780261951206&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-104973288.first_rank_v2_pc_rank_v29&amp;utm_term=python%E7%94%A8turtle%E5%AE%9E%E4%BE%8B&amp;spm=1018.2226.3001.4187">实例</a></li><li><a href="https://blog.csdn.net/minshiwang/article/details/104482160?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163212866516780262557989%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=163212866516780262557989&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~hot_rank-6-104482160.first_rank_v2_pc_rank_v29&amp;utm_term=%E9%A2%9C%E8%89%B2%E6%A8%A1%E5%BC%8F&amp;spm=1018.2226.3001.4187">色彩模式</a></li><li><a href="https://blog.csdn.net/heyuchang666/article/details/41812275?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163212866516780262557989%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=163212866516780262557989&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~hot_rank-4-41812275.first_rank_v2_pc_rank_v29&amp;utm_term=%E9%A2%9C%E8%89%B2%E6%A8%A1%E5%BC%8F&amp;spm=1018.2226.3001.4187">RGB色彩模式</a></li></ul>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;Python turtle 参考资料&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://blog.csdn.net/sandalphon4869/article/details/99443949?ops_request_misc=&amp;amp;request_id=&amp;</summary>
-      
-    
-    
-    
-    <category term="技术博客" scheme="https://sumsc.github.io/categories/%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%AE%A2/"/>
+    <category term="活动" scheme="https://sumsc.github.io/categories/%E6%B4%BB%E5%8A%A8/"/>
     
     
     <category term="Python" scheme="https://sumsc.github.io/tags/Python/"/>
+    
+    <category term="Hackathon" scheme="https://sumsc.github.io/tags/Hackathon/"/>
     
   </entry>
   
@@ -149,6 +135,32 @@
       
     <summary type="html">&lt;h3 id=&quot;什么是-python&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#什么是-python&quot;&gt;&lt;/a&gt; 什么是 Python&lt;/h3&gt;
 &lt;p&gt;Python是一种计算机编程语言。计算机编程语言和我们日常使用的自然语言有所不同，最大的区别就是</summary>
+      
+    
+    
+    
+    <category term="技术博客" scheme="https://sumsc.github.io/categories/%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%AE%A2/"/>
+    
+    
+    <category term="Python" scheme="https://sumsc.github.io/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python 指南 (turtle)</title>
+    <link href="https://sumsc.github.io/2021/10/02/python2021-turtle/"/>
+    <id>https://sumsc.github.io/2021/10/02/python2021-turtle/</id>
+    <published>2021-10-01T23:00:00.000Z</published>
+    <updated>2021-11-05T13:38:41.559Z</updated>
+    
+    <content type="html"><![CDATA[<p>Python turtle 参考资料</p><ul><li><a href="https://blog.csdn.net/sandalphon4869/article/details/99443949?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=pythontuttle%E5%85%A5%E9%97%A8&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-99443949.first_rank_v2_pc_rank_v29&amp;spm=1018.2226.3001.4187">入门</a></li><li><a href="https://blog.csdn.net/qq_38851184/article/details/104973288?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163212833516780261951206%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=163212833516780261951206&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-104973288.first_rank_v2_pc_rank_v29&amp;utm_term=python%E7%94%A8turtle%E5%AE%9E%E4%BE%8B&amp;spm=1018.2226.3001.4187">实例</a></li><li><a href="https://blog.csdn.net/minshiwang/article/details/104482160?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163212866516780262557989%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=163212866516780262557989&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~hot_rank-6-104482160.first_rank_v2_pc_rank_v29&amp;utm_term=%E9%A2%9C%E8%89%B2%E6%A8%A1%E5%BC%8F&amp;spm=1018.2226.3001.4187">色彩模式</a></li><li><a href="https://blog.csdn.net/heyuchang666/article/details/41812275?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163212866516780262557989%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&amp;request_id=163212866516780262557989&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~hot_rank-4-41812275.first_rank_v2_pc_rank_v29&amp;utm_term=%E9%A2%9C%E8%89%B2%E6%A8%A1%E5%BC%8F&amp;spm=1018.2226.3001.4187">RGB色彩模式</a></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;Python turtle 参考资料&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://blog.csdn.net/sandalphon4869/article/details/99443949?ops_request_misc=&amp;amp;request_id=&amp;</summary>
       
     
     
