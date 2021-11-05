@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>使用 Python3 urllib 模拟 HTTP 请求 | SUMSC</title>
+  <meta name="description" content="使用 Python3 Built-in 的 urllib 可以发送 HTTP 请求，虽然不如 requests 方便，但是用来做一些 parse 工作还是相当不错的。  urllib urllib有四个模块：  request，处理请求； error，处理错误； parse，对请求内容解码和编码； robotparser，检查robot.txt。   发送请求 request用于发送请求。  ur">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 Python3 urllib 模拟 HTTP 请求">
+<meta property="og:url" content="https://sumsc.github.io/2019/05/19/python3-urllib-http/index.html">
+<meta property="og:site_name" content="SUMSC">
+<meta property="og:description" content="使用 Python3 Built-in 的 urllib 可以发送 HTTP 请求，虽然不如 requests 方便，但是用来做一些 parse 工作还是相当不错的。  urllib urllib有四个模块：  request，处理请求； error，处理错误； parse，对请求内容解码和编码； robotparser，检查robot.txt。   发送请求 request用于发送请求。  ur">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-05-18T23:00:00.000Z">
+<meta property="article:modified_time" content="2021-11-05T13:38:41.559Z">
+<meta property="article:author" content="SUMSC">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://sumsc.github.io/2019/05/19/python3-urllib-http/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="SUMSC" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="//github.com/SUMSC" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">苏州大学计算机爱好者协会（微软学生俱乐部）</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">微软开源学习社群联络社团</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Suzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-blog">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%AE%A2">
+            
+            <span class="menu-title">技术博客</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-activity">
+          <a href="/categories/%E6%B4%BB%E5%8A%A8">
+            
+            <span class="menu-title">活动</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-github">
+          <a target="_blank" rel="noopener" href="//github.com/SUMSC">
+            
+            <span class="menu-title">GitHub</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <span class="menu-title">友情链接</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <span class="menu-title">关于我们</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="//github.com/SUMSC" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>这里是苏州大学计算机爱好者协会（微软学生俱乐部），在这里，你可以看到关于我们的信息以及我们最近的动态。</p><p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%AE%A2/">技术博客</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B4%BB%E5%8A%A8/">活动</a><span class="category-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Hackathon/" style="font-size: 13px;">Hackathon</a> <a href="/tags/Python/" style="font-size: 14px;">Python</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">十一月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%B4%BB%E5%8A%A8/">活动</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/11/05/hackathon2021/" class="title">2021 Hackathon：Pygame and Turtle</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-11-05T14:00:00.000Z" itemprop="datePublished">2021-11-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/11/05/hackathon2021-q2-tetris/" class="title">2021 Hackathon | Tetris</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-11-05T13:57:23.000Z" itemprop="datePublished">2021-11-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2021/11/05/hackathon2021-q1-snake/" class="title">2021 Hackathon | 贪吃蛇</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-11-05T13:57:14.000Z" itemprop="datePublished">2021-11-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%AE%A2/">技术博客</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/10/02/python2021-turtle/" class="title">Python 指南 (turtle)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-10-01T23:00:00.000Z" itemprop="datePublished">2021-10-02</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%AE%A2/">技术博客</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/10/02/python2021-1/" class="title">Python 指南 (1)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-10-01T23:00:00.000Z" itemprop="datePublished">2021-10-02</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-python3-urllib-http" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      使用 Python3 urllib 模拟 HTTP 请求
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2019/05/19/python3-urllib-http/" class="article-date">
+	  <time datetime="2019-05-18T23:00:00.000Z" itemprop="datePublished">2019-05-19</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%8D%9A%E5%AE%A2/">技术博客</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Python/" rel="tag">Python</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2019/05/19/python3-urllib-http/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 2k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 9(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>使用 Python3 Built-in 的 urllib 可以发送 HTTP 请求，虽然不如 <code>requests</code> 方便，但是用来做一些 <code>parse</code> 工作还是相当不错的。</p>
+<h2 id="urllib"><a class="markdownIt-Anchor" href="#urllib"></a> urllib</h2>
+<p><code>urllib</code>有四个模块：</p>
+<ul>
+<li><code>request</code>，处理请求；</li>
+<li><code>error</code>，处理错误；</li>
+<li><code>parse</code>，对请求内容解码和编码；</li>
+<li><code>robotparser</code>，检查<code>robot.txt</code>。</li>
+</ul>
+<h3 id="发送请求"><a class="markdownIt-Anchor" href="#发送请求"></a> 发送请求</h3>
+<p><code>request</code>用于发送请求。</p>
+<h4 id="urlopen"><a class="markdownIt-Anchor" href="#urlopen"></a> <code>urlopen()</code></h4>
+<p>示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line"></span><br><span class="line">res = urllib.request.urlopen(<span class="string">&quot;https://www.python.org/&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(res.read().decode(<span class="string">&#x27;utf8&#x27;</span>)) <span class="comment"># get html</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(res)) <span class="comment"># &lt;class &#x27;http.client.HTTPResponse&#x27;&gt;</span></span><br><span class="line"><span class="built_in">print</span>(res.getheader(<span class="string">&quot;Server&quot;</span>)) <span class="comment"># &#x27;nginx&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(res.getheaders()) <span class="comment"># Response Headers</span></span><br><span class="line"><span class="built_in">print</span>(res.status) <span class="comment"># 200</span></span><br></pre></td></tr></table></figure>
+<p>这个方法也支持表单提交。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line"><span class="keyword">import</span> urllib.parse</span><br><span class="line"></span><br><span class="line">data = <span class="built_in">bytes</span>(urllib.parse.urlencode(&#123;<span class="string">&quot;word&quot;</span>: <span class="string">&quot;hi&quot;</span>&#125;), encoding=<span class="string">&#x27;utf8&#x27;</span>)</span><br><span class="line">res = urllib.request.urlopen(<span class="string">&quot;https://httpbin.org/post&quot;</span>, data=data)</span><br><span class="line"><span class="built_in">print</span>(res.read().decode(<span class="string">&#x27;utf8&#x27;</span>))</span><br></pre></td></tr></table></figure>
+<h4 id="request"><a class="markdownIt-Anchor" href="#request"></a> <code>Request</code></h4>
+<p><code>Request</code>类可以生成完整的请求实例，添加 Headers，指定 Method。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">url = <span class="string">&quot;http://httpbin.org/post&quot;</span></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6)&quot;</span>,</span><br><span class="line">    <span class="string">&quot;Host&quot;</span>: <span class="string">&#x27;httpbin.org&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">dict</span> = &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;Amber&#x27;</span>&#125;</span><br><span class="line">data = <span class="built_in">bytes</span>(urllib.parse.urlencode(<span class="built_in">dict</span>), encoding=<span class="string">&#x27;utf8&#x27;</span>)</span><br><span class="line">req = urllib.request.Request(url=url, data=data, headers=headers, method=<span class="string">&#x27;POST&#x27;</span>)</span><br><span class="line">res = urllib.request.urlopen(req)</span><br><span class="line"><span class="built_in">print</span>(res.read().decode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br></pre></td></tr></table></figure>
+<h4 id="高级用法"><a class="markdownIt-Anchor" href="#高级用法"></a> 高级用法</h4>
+<p>生成一个请求，不仅仅会需要 URI、参数、方法和请求头，还需要处理 Cookie、代理等等。生成这样的高级请求就要用到<code>Handler</code>。<code>urllib.request.BaseHandler</code>提供了最基本的方法，可以集成它来自己创建<code>Handler</code>，有一些内置的：</p>
+<ul>
+<li><code>HTTPDefaultErrorHandler</code></li>
+<li><code>HTTPRedirectHandler</code></li>
+<li><code>HTTPCookieProcessor</code></li>
+<li><code>ProxyHandle</code></li>
+<li><code>HTTPPasswordMgr</code></li>
+<li><code>HTTPBasicAuthHandler</code></li>
+</ul>
+<p>还有一些其他的，可以查看文档。</p>
+<p>另外一个重要的类是<code>OpenerDirector</code>，简称<code>Opener</code>。<code>Opener</code>可以使用<code>open()</code>方法，返回<code>response</code>。我们需要利用<code>Handler</code>来构建<code>Opener</code>。</p>
+<h5 id="cookie"><a class="markdownIt-Anchor" href="#cookie"></a> Cookie</h5>
+<p>下面是一个利用<code>HTTPCookieProcessor</code>读写 Cookie 的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">build_cookie</span>(<span class="params">cookie_file, login_req=<span class="literal">None</span>, override=<span class="literal">False</span></span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    将 Cookies 写入 cookie_file，或从其中读出 Cookies</span></span><br><span class="line"><span class="string">    :param cookie_file: Cookie 文件路径</span></span><br><span class="line"><span class="string">    :param login_req: 建立 Cookie 的请求</span></span><br><span class="line"><span class="string">    :param override: 是否覆盖原先的 Cookie 文件</span></span><br><span class="line"><span class="string">    :return: cookie_opener</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">import</span> os</span><br><span class="line">    <span class="keyword">from</span> http.cookiejar <span class="keyword">import</span> LWPCookieJar</span><br><span class="line">    <span class="keyword">from</span> urllib.request <span class="keyword">import</span> HTTPCookieProcessor, build_opener</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">not</span> os.path.exists(cookie_file)) <span class="keyword">or</span> override:</span><br><span class="line">        <span class="keyword">if</span> login_req <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">raise</span> Exception(<span class="string">&quot;请给出登陆请求！&quot;</span>)</span><br><span class="line">        cookie = LWPCookieJar(cookie_file)</span><br><span class="line">        cookie_opener = build_opener(HTTPCookieProcessor(cookie))</span><br><span class="line">        cookie_opener.<span class="built_in">open</span>(login_req)</span><br><span class="line">        cookie.save(ignore_expires=<span class="literal">True</span>, ignore_discard=<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">else</span>:  <span class="comment"># 直接读取</span></span><br><span class="line">        cookie = LWPCookieJar()</span><br><span class="line">        cookie.load(cookie_file, ignore_discard=<span class="literal">True</span>, ignore_expires=<span class="literal">True</span>)</span><br><span class="line">        cookie_opener = build_opener(HTTPCookieProcessor(cookie))</span><br><span class="line">    <span class="keyword">return</span> cookie_opener</span><br></pre></td></tr></table></figure>
+<h5 id="代理"><a class="markdownIt-Anchor" href="#代理"></a> 代理</h5>
+<p>下面是一个利用<code>ProxyHandler</code>实现代理访问的方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">build_proxy</span>(<span class="params">proxy</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    根据 proxy 参数获取代理访问</span></span><br><span class="line"><span class="string">    :param proxy: dict，key 为协议，value 为代理地址</span></span><br><span class="line"><span class="string">    :return: proxy_opener</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">from</span> urllib.request <span class="keyword">import</span> ProxyHandler, build_opener</span><br><span class="line">    <span class="keyword">return</span> build_opener(ProxyHandler(proxy))</span><br></pre></td></tr></table></figure>
+<h3 id="处理异常"><a class="markdownIt-Anchor" href="#处理异常"></a> 处理异常</h3>
+<p><code>urllib</code>提供了<code>URLError</code>和<code>HTTPError</code>，所有<code>request</code>返回的异常都在<code>URLError</code>中。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request, error</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    response = request.urlopen(<span class="string">&#x27;https://xxx.com/&#x27;</span>)</span><br><span class="line"><span class="keyword">except</span> error.HTTPError <span class="keyword">as</span> e:</span><br><span class="line">    <span class="built_in">print</span>(e.reason, e.code, e.headers)</span><br><span class="line"><span class="keyword">except</span> error.URLError <span class="keyword">as</span> e:</span><br><span class="line">    <span class="built_in">print</span>(e.reason)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Request Successfully&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="解析链接"><a class="markdownIt-Anchor" href="#解析链接"></a> 解析链接</h3>
+<p>URL 中有一些很重要的信息，包括协议、域名、资源地址、参数、查询以及分段。使用<code>parse</code>模块可以对 URL 进行解析。</p>
+<ul>
+<li><code>urlparse</code>可以将 URL 分为协议、域名、资源地址、参数、查询以及分段六块，<code>urlunparse</code>可以将一个六元素列表组织成一个 URL。</li>
+<li><code>urlsplit</code>无视参数项，分解为协议、域名、资源地址、查询以及分段五块，<code>urlunsplit</code>将一个五元素列表组织成一个 URL。</li>
+<li><code>urlencode</code>将一个字典编码为一个 GET 查询字符串。<code>parse_qs</code>将一个 GET 查询字符串解码为字典。</li>
+<li><code>quote</code>将字符串进行 URL 序列化，<code>unquote</code>反之。</li>
+</ul>
+<h3 id="分析robots协议"><a class="markdownIt-Anchor" href="#分析robots协议"></a> 分析<code>Robots</code>协议</h3>
+<p><code>robotparse</code>模块解析<code>robots.txt</code>，判断爬虫是否有权限对某个页面进行爬取。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">can_fetch</span>(<span class="params">ua, url, robots_url</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    查看 UA 是否可以爬取该 URL</span></span><br><span class="line"><span class="string">    :param ua: 爬虫 User-Agent</span></span><br><span class="line"><span class="string">    :param url: 需要爬取的页面地址</span></span><br><span class="line"><span class="string">    :param robots_url: 主站的 robots.txt</span></span><br><span class="line"><span class="string">    :return: Bool</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">from</span> urllib <span class="keyword">import</span> parse, robotparser</span><br><span class="line">    robots = robotparser.RobotFileParser(robots_url)</span><br><span class="line">    robots.read()</span><br><span class="line">    <span class="keyword">return</span> robots.can_fetch(ua, url)</span><br></pre></td></tr></table></figure>
+<h2 id="requests"><a class="markdownIt-Anchor" href="#requests"></a> requests</h2>
+<h3 id="基本用法"><a class="markdownIt-Anchor" href="#基本用法"></a> 基本用法</h3>
+<p><code>requests</code>可以直接发起对应的 HTTP Method 请求：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url = <span class="string">&quot;https://www.baidu.com/&quot;</span></span><br><span class="line">requests.get(url)</span><br><span class="line">requests.post(url)</span><br><span class="line">requests.put(url)</span><br><span class="line">requests.delete(url)</span><br><span class="line">requests.options(url)</span><br></pre></td></tr></table></figure>
+<h4 id="get"><a class="markdownIt-Anchor" href="#get"></a> GET</h4>
+<p>对于 GET 参数，可以直接将字典附加到<code>requests.get()</code>的<code>params</code>参数。对于 API 返回的 JSON，可以直接调用<code>response.json()</code>。可以直接附加 Headers。<code>response</code>的<code>text</code>属性是 Unicode 解码，<code>content</code>属性是二进制。封装的<code>response</code>中还可以获取 Cookies，History，URL，Status_Code</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">res = requests.get(<span class="string">&#x27;https://www.zhihu.com/&#x27;</span>, headers=headers)</span><br></pre></td></tr></table></figure>
+<h4 id="post"><a class="markdownIt-Anchor" href="#post"></a> POST</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">data = &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;germey&#x27;</span>, <span class="string">&#x27;age&#x27;</span>: <span class="string">&#x27;22&#x27;</span>&#125;</span><br><span class="line">r = requests.post(<span class="string">&quot;http://httpbin.org/post&quot;</span>, data=data)</span><br><span class="line"><span class="built_in">print</span>(r.json())</span><br></pre></td></tr></table></figure>
+<h3 id="高级用法-2"><a class="markdownIt-Anchor" href="#高级用法-2"></a> 高级用法</h3>
+<h4 id="文件上传"><a class="markdownIt-Anchor" href="#文件上传"></a> 文件上传</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">files = &#123;<span class="string">&#x27;file&#x27;</span>: <span class="built_in">open</span>(<span class="string">&#x27;favicon.ico&#x27;</span>, <span class="string">&#x27;rb&#x27;</span>)&#125;</span><br><span class="line">r = requests.post(<span class="string">&quot;http://httpbin.org/post&quot;</span>, files=files)</span><br><span class="line"><span class="built_in">print</span>(r.text)</span><br></pre></td></tr></table></figure>
+<h4 id="cookie-2"><a class="markdownIt-Anchor" href="#cookie-2"></a> Cookie</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">res = requests.get(<span class="string">&quot;https://www.baidu.com/&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(res.cookies)</span><br><span class="line"><span class="keyword">for</span> k, v <span class="keyword">in</span> r.cookies.items():</span><br><span class="line">    <span class="built_in">print</span>(k, <span class="string">&#x27;=&#x27;</span>, v)</span><br></pre></td></tr></table></figure>
+<p>在<code>requests</code>中使用 Cookie，可以像往常一样直接放在 Headers 中，不过稍微有些难看，下面是完整的使用 Cookie 的方式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> http.cookiejar <span class="keyword">import</span> LWPCookieJar</span><br><span class="line"></span><br><span class="line">jar = requests.cookies.RequestsCookieJar()</span><br><span class="line">cookie = LWPCookieJar()</span><br><span class="line">cookie.load(<span class="string">&quot;cookie.txt&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> cookie:</span><br><span class="line">    jar.<span class="built_in">set</span>(i.name, i.value)</span><br></pre></td></tr></table></figure>
+<h4 id="session"><a class="markdownIt-Anchor" href="#session"></a> Session</h4>
+<p>上面的维持 Cookie 发起访问的方式相当麻烦，所以<code>requests</code>提供了更好的方法：Session。对于浏览器来说，会话（Session）是无比平常的东西。如果留心的话，在解析网络时经常能发现 Request Headers 总会有<code>keep-alive</code>。事实上，会话是依赖于 Cookie 的，由于 HTTP 是无状态协议，所以使用 Cookie 来标记长连接，也就是会话。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">s = requests.Session()</span><br><span class="line">s.get(<span class="string">&quot;https://www.baidu.com&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>会话可以看作是<code>urllib</code>的一个 Opener，在一次会话中，会保留 Cookie、代理，因而非常方便。</p>
+<h4 id="ssl-证书"><a class="markdownIt-Anchor" href="#ssl-证书"></a> SSL 证书</h4>
+<p><code>requests</code>提供了 SSL 证书验证的功能，如果遇到无法验证的 SSL 证书，可以添加<code>verify=False</code>跳过验证。</p>
+<h4 id="代理-2"><a class="markdownIt-Anchor" href="#代理-2"></a> 代理</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">proxies = &#123;</span><br><span class="line">    <span class="string">&#x27;http&#x27;</span>: <span class="string">&#x27;http://127.0.0.1:1087&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;https&#x27;</span>: <span class="string">&#x27;https://127.0.0.1:1087&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">proxies_socks = &#123;</span><br><span class="line">    <span class="string">&#x27;http&#x27;</span>: <span class="string">&#x27;socks5://127.0.0.1:1086&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;https&#x27;</span>: <span class="string">&#x27;socks5://127.0.0.1:1086&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">requests.get(<span class="string">&quot;https://www.google.com&quot;</span>, proxies=proxies)</span><br></pre></td></tr></table></figure>
+<h4 id="prepared-request"><a class="markdownIt-Anchor" href="#prepared-request"></a> Prepared Request</h4>
+<p>有可能我们需要一个结构化的请求来多次复用，这时候我们可以使用<code>Request</code>类来生成一个底层的请求对象。一个请求对象可以自己与处理，但是当使用<code>Session</code>时，就需要使用<code>Session</code>去预处理。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> requests <span class="keyword">import</span> Request, Session</span><br><span class="line"></span><br><span class="line">url = <span class="string">&#x27;http://httpbin.reg/post&#x27;</span></span><br><span class="line">data = &#123;</span><br><span class="line">    <span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;germey&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line">s = Session()</span><br><span class="line">req = Request(<span class="string">&#x27;POST&#x27;</span>, url, data=data, headers=headers)</span><br><span class="line"><span class="comment"># pre_req = req.prepare()</span></span><br><span class="line">pre_req = s.prepare_request(req)</span><br><span class="line">res = s.send(pre_req)</span><br><span class="line"><span class="built_in">print</span>(res.text)</span><br></pre></td></tr></table></figure>
+<h2 id="正则"><a class="markdownIt-Anchor" href="#正则"></a> 正则</h2>
+<p>完整讲述正则表达式过于复杂，不如自己理解。常用的正则表达式工具列在下方：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://tool.oschina.net/regex">正则表达式测试——开源中国</a></li>
+<li><a target="_blank" rel="noopener" href="http://tool.oschina.net/uploads/apidocs/jquery/regexp.html">正则表达式手册——开源中国</a></li>
+<li><a target="_blank" rel="noopener" href="https://deerchao.net/tutorials/regex/regex.htm">正则表达式入门教程</a></li>
+</ul>
+<p>这里我们来说一些 Python3 re 模块的一些使用。</p>
+<h3 id="常用函数"><a class="markdownIt-Anchor" href="#常用函数"></a> 常用函数</h3>
+<h4 id="修饰符"><a class="markdownIt-Anchor" href="#修饰符"></a> 修饰符</h4>
+<ul>
+<li><code>re.S</code>：使<code>.</code>匹配换行符在内的所有字符；</li>
+<li><code>re.I</code>：大小写不敏感；</li>
+<li><code>re.M</code>：多行匹配，影响<code>^</code>和<code>$</code>；</li>
+<li><code>re.L</code>：本地化识别匹配；</li>
+<li><code>re.U</code>：根据 Unicode 解析字符；</li>
+<li><code>re.X</code>：可以更灵活地写正则表达式。</li>
+</ul>
+<p>一般常用<code>re.S</code>和<code>re.I</code>。</p>
+<h4 id="match"><a class="markdownIt-Anchor" href="#match"></a> <code>match()</code></h4>
+<p>从字符串起始处开始匹配，返回一个<code>match</code>对象，可以使用<code>.group()</code>获取匹配到的内容。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">url = re.match(<span class="string">&quot;.*?&lt;title&gt;(.*?)&lt;/title&gt;&quot;</span>, res.text)</span><br><span class="line"><span class="built_in">print</span>(url.group(<span class="number">1</span>)) <span class="comment"># Google </span></span><br></pre></td></tr></table></figure>
+<h4 id="search"><a class="markdownIt-Anchor" href="#search"></a> <code>search()</code></h4>
+<p>和<code>match()</code>很像，区别是不是固定从开头开始查找。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">res = re.search(<span class="string">&#x27;&lt;title&gt;(.*?)&lt;/title&gt;&#x27;</span>, res.text)</span><br><span class="line"><span class="built_in">print</span>(url.group(<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+<h4 id="findall"><a class="markdownIt-Anchor" href="#findall"></a> <code>findall()</code></h4>
+<p>获取所有正则能匹配到的内容。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">res = re.findall(<span class="string">&#x27;&lt;a.*?href=&quot;(.*?)&quot;&#x27;</span>, res.text)</span><br><span class="line"><span class="built_in">print</span>(res)</span><br></pre></td></tr></table></figure>
+<h4 id="sub"><a class="markdownIt-Anchor" href="#sub"></a> <code>sub()</code></h4>
+<p>用正则表达式统一替换。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">content = <span class="string">&#x27;123abc456&#x27;</span></span><br><span class="line">content = re.sub(<span class="string">&#x27;\d+&#x27;</span>, <span class="string">&#x27;&#x27;</span>, content)</span><br><span class="line"><span class="built_in">print</span>(content) <span class="comment"># abc</span></span><br></pre></td></tr></table></figure>
+<h4 id="compile"><a class="markdownIt-Anchor" href="#compile"></a> <code>compile()</code></h4>
+<p>获取一个组织完成的正则表达式对象，便于复用。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">pattern = re.<span class="built_in">compile</span>(<span class="string">&#x27;ppp.*?ppp&#x27;</span>, re.S)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://sumsc.github.io/2019/05/19/python3-urllib-http/" title="使用 Python3 urllib 模拟 HTTP 请求" target="_blank" rel="external">https://sumsc.github.io/2019/05/19/python3-urllib-http/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="//github.com/SUMSC" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="//github.com/SUMSC" target="_blank"><span class="text-dark">苏州大学计算机爱好者协会（微软学生俱乐部）</span><small class="ml-1x">微软开源学习社群联络社团</small></a></h3>
+        <div>计算机爱好者协会是苏州大学计算机科学与技术学院的学术性社团，为2015年与微软亚洲研究院联合成立的苏州大学微软学生俱乐部，现为微软开源学习社群的联络社团。欢迎加入俱乐部QQ群：497516494 | 关注微信公众号：SUMSTC</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/10/23/hackathon2020/" title="2020 Hackathon：Python Turtle"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2018/07/13/frp-2018/" title="用frp实现内网穿透"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="//github.com/SUMSC" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2021 SUMSC
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+
+
+
+
+
+
+</body>
+</html>
