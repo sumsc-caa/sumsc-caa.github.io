@@ -23,13 +23,6 @@
   </url>
   
   <url>
-    <loc>https://sumsc.github.io/2021/10/02/python2021-2/</loc>
-    
-    <lastmod>2021-11-05</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://sumsc.github.io/2021/10/02/python2021-turtle/</loc>
     
     <lastmod>2021-11-05</lastmod>
@@ -37,7 +30,7 @@
   </url>
   
   <url>
-    <loc>https://sumsc.github.io/2019/05/19/python3-urllib-http/</loc>
+    <loc>https://sumsc.github.io/2021/10/02/python2021-2/</loc>
     
     <lastmod>2021-11-05</lastmod>
     
@@ -51,21 +44,21 @@
   </url>
   
   <url>
+    <loc>https://sumsc.github.io/2019/05/19/python3-urllib-http/</loc>
+    
+    <lastmod>2021-11-05</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sumsc.github.io/categories/index.html</loc>
+    
+    <lastmod>2021-11-05</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://sumsc.github.io/links/index.html</loc>
-    
-    <lastmod>2021-11-05</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sumsc.github.io/repository/index.html</loc>
-    
-    <lastmod>2021-11-05</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://sumsc.github.io/about/index.html</loc>
     
     <lastmod>2021-11-05</lastmod>
     
@@ -79,7 +72,14 @@
   </url>
   
   <url>
-    <loc>https://sumsc.github.io/categories/index.html</loc>
+    <loc>https://sumsc.github.io/about/index.html</loc>
+    
+    <lastmod>2021-11-05</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://sumsc.github.io/repository/index.html</loc>
     
     <lastmod>2021-11-05</lastmod>
     
